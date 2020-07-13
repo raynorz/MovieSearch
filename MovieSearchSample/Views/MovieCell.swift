@@ -1,6 +1,6 @@
 //
 //  ImageCell.swift
-//  ImageTracker
+//  MovieSearch
 //
 //  Created by Daniel Brezina on 08/07/2020.
 //  Copyright © 2020 Daniel Brezina. All rights reserved.
@@ -12,11 +12,12 @@ struct MovieCell: View {
     var movie: Movie
     var body: some View {
         Text(movie.title)
+            .multilineTextAlignment(.leading)
     }
 }
 
-//struct ImageCell_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ImageCell(image: Photo(id: "id", owner: "owner", secret: "secret", server: "server", farm: 0, title: "Title", ispublic: 1, isfriend: 1, isfamily: 1))
-//    }
-//}
+struct MovieCell_Previews: PreviewProvider {
+    static var previews: some View {
+        MovieCell(movie: sampleMoviesData[0])
+    }
+}

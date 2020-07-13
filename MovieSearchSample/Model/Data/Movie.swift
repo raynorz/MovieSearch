@@ -8,7 +8,9 @@
 
 import Foundation
 
-// MARK: - Welcome
+// MARK: - Movie
+
+/// Movie struct based on response from omdb API
 struct Movie: Codable {
     let title, year, rated, released: String
     let runtime, genre, director, writer: String

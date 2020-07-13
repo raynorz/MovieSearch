@@ -7,3 +7,11 @@
 //
 
 import Foundation
+
+final class SampleAPIManager: APIManager { }
+
+extension SampleAPIManager {
+    func request<T>(url: URL, completion: @escaping ((Result<T, Error>) -> (Void))) where T : Decodable {
+        completion(.success(sampleMoviesData.randomElement() as! T))
+    }
+}

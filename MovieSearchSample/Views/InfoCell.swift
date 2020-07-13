@@ -1,6 +1,6 @@
 //
 //  InfoCell.swift
-//  ImageTracker
+//  MovieSearch
 //
 //  Created by Daniel Brezina on 08/07/2020.
 //  Copyright © 2020 Daniel Brezina. All rights reserved.
@@ -15,16 +15,16 @@ struct InfoCell: View {
         HStack {
             TextField("Movie", text: $movie)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding()
             Spacer()
             Button(action: {
                 self.search(self.movie)
+                self.movie = ""
             }) {
                 Image(systemName: "magnifyingglass")
                     .foregroundColor(.blue)
             }
-            .padding()
         }
+        .padding()
     }
 }
 

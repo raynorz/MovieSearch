@@ -1,6 +1,6 @@
 //
 //  SearchMovieRouter.swift
-//  ImageTracker
+//  MovieSearch
 //
 //  Created by Daniel Brezina on 09/07/2020.
 //  Copyright © 2020 Daniel Brezina. All rights reserved.
@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Router enum that creates request URL for movie search with given parameters
 enum SearchMovieRouter: APIRequestConventor {
     case searchMovie(title: String)
 }

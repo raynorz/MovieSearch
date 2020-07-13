@@ -7,3 +7,19 @@
 //
 
 import Foundation
+
+final class SampleMoviesService: MovieDataServiceProtocol {
+    let apiManager: APIManager
+    
+    init(apiManager: APIManager) {
+        self.apiManager = apiManager
+    }
+}
+
+extension SampleMoviesService {
+    func searchMovie(byTitle: String, completion: @escaping ((Result<Movie, Error>) -> (Void))) {
+        let url = URL(string: "")!
+        apiManager.request(url: url, completion: completion)
+        
+    }
+}

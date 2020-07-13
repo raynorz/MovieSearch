@@ -1,6 +1,6 @@
 //
 //  APIError.swift
-//  ImageTracker
+//  MovieSearch
 //
 //  Created by Daniel Brezina on 09/07/2020.
 //  Copyright © 2020 Daniel Brezina. All rights reserved.

@@ -1,6 +1,6 @@
 //
 //  ViewModel.swift
-//  ImageTracker
+//  MovieSearch
 //
 //  Created by Daniel Brezina on 08/07/2020.
 //  Copyright © 2020 Daniel Brezina. All rights reserved.
@@ -8,8 +8,8 @@
 
 import Combine
 import SwiftUI
-import CoreLocation
 
+/// Basic view model, that calls movie search requests and holds all the data for the view
 final class MoviesViewModel: ObservableObject {
     @Published var movies: [Movie] = []
     

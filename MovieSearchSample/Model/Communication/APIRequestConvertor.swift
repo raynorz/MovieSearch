@@ -1,6 +1,6 @@
 //
 //  APIRequestConvertor.swift
-//  ImageTracker
+//  MovieSearch
 //
 //  Created by Daniel Brezina on 09/07/2020.
 //  Copyright © 2020 Daniel Brezina. All rights reserved.
@@ -16,6 +16,7 @@ struct URLComponentsConstants {
     static let apiKeyValue = "5883e4d2"
 }
 
+/// Protocol that creates basic URL for APIManager and converts addition data into query parameters
 protocol APIRequestConventor {
     var baseURLComponents: URLComponents { get }
     
