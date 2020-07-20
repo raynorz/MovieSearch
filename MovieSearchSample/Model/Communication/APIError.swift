@@ -10,6 +10,8 @@ import Foundation
 
 enum APIError: Error {
     case invalidURL
+    case failedRequest
+    case decodeError
 }
 
 extension APIError {
@@ -17,6 +19,10 @@ extension APIError {
         switch self {
         case .invalidURL:
             return "Invalid URL Error"
+        case .failedRequest:
+            return "Request failed"
+        case .decodeError:
+            return "Error while decoding response"
         }
     }
 }

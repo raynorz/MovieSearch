@@ -7,10 +7,12 @@
 //
 
 import Foundation
+import Combine
 
 /// Protocol for service that handles movie search on OMDB
 protocol MovieDataServiceProtocol {
-    func searchMovie(byTitle: String, completion: @escaping((Swift.Result<Movie, Error>) -> (Void)))
+    func searchMovie(byTitle: String) -> AnyPublisher<Movie, APIError>
+//    func searchMovie(byTitle: String, completion: @escaping((Swift.Result<Movie, Error>) -> (Void)))
 }
 
 /// Implementation of MovieDataServiceProtocol
@@ -23,16 +25,9 @@ final class MovieDataService: MovieDataServiceProtocol {
 }
 
 extension MovieDataService {
-    /// search movie on OMDB with given title
-    /// - Parameters:
-    ///   - title: title of the movie
-    ///   - completion: Swift Result with Movie data type
-    func searchMovie(byTitle title: String, completion: @escaping ((Result<Movie, Error>) -> (Void))) {
-        guard let url = SearchMovieRouter.searchMovie(title: title).createUrl() else {
-            completion(.failure(APIError.invalidURL))
-            return
-        }
+    func searchMovie(byTitle title: String) -> AnyPublisher<Movie, APIError> {
+        guard let url = SearchMovieRouter.searchMovie(title: title).createUrl() else { return Fail(error: APIError.invalidURL).eraseToAnyPublisher() }
         
-        apiManager.request(url: url, completion: completion)
+        return apiManager.request(url: url)
     }
 }

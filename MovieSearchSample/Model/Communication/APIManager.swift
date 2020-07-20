@@ -7,8 +7,10 @@
 //
 
 import Foundation
+import Combine
 
 /// Basic protocol for generic communication with server
 protocol APIManager {
-    func request<T>(url: URL, completion: @escaping((Swift.Result<T, Error>) -> (Void))) where T: Decodable
+//    func request<T>(url: URL, completion: @escaping((Swift.Result<T, Error>) -> (Void))) where T: Decodable
+    func request<T: Decodable>(url: URL) -> AnyPublisher<T, APIError>
 }

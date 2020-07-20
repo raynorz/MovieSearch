@@ -7,31 +7,27 @@
 //
 
 import Foundation
+import Combine
 
 /// Simple server communication class
 /// class implements APIManager protocol with func request<T>
-final class ServerCommunication: APIManager { }
+final class ServerCommunication: APIManager {
+
+}
 
 extension ServerCommunication {
-    /// call URL request and decodes data from server into given Decodable type
-    /// - Parameters:
-    ///   - url: url created from some Router
-    ///   - completion: Swift Result with given Decodable type (success) or error (failure)
-    func request<T>(url: URL, completion: @escaping ((Result<T, Error>) -> (Void))) where T : Decodable {
-        DispatchQueue.global(qos: .utility).async {
-            URLSession.shared.dataTask(with: url) { (data, response, error) in
-                guard error == nil, let data = data else {
-                    completion(.failure(error!))
-                    return
-                }
-                
-                do {
-                    let decoder = JSONDecoder()
-                    completion(.success(try decoder.decode(T.self, from: data)))
-                } catch let error {
-                    completion(.failure(error))
-                }
-            }.resume()
-        }
+    func request<T>(url: URL) -> AnyPublisher<T, APIError> where T : Decodable {
+        return URLSession.shared.dataTaskPublisher(for: URLRequest(url: url))
+            .mapError { _ in APIError.failedRequest }
+            .flatMap { data in
+                decode(data.data)}
+            .eraseToAnyPublisher()
     }
+}
+
+internal func decode<T: Decodable>(_ data: Data) -> AnyPublisher<T, APIError> {
+    let decoder = JSONDecoder()
+    return Just(data).decode(type: T.self, decoder: decoder)
+        .mapError { _ in APIError.decodeError }
+        .eraseToAnyPublisher()
 }

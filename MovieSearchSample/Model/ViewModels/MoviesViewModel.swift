@@ -14,23 +14,25 @@ final class MoviesViewModel: ObservableObject {
     @Published var movies: [Movie] = []
     
     private let movieDataService: MovieDataServiceProtocol
+    private var disposables = Set<AnyCancellable>()
     
     init(movieDataService: MovieDataServiceProtocol) {
         self.movieDataService = movieDataService
     }
 
     func fetch(movie: String) {
-        movieDataService.searchMovie(byTitle: movie) { [weak self](result) -> (Void) in
-            guard let self = self else { return }
-            
-            switch result {
-            case .success(let newMovie):
-                DispatchQueue.main.async {
-                    self.movies.insert(newMovie, at: 0)
+        movieDataService.searchMovie(byTitle: movie)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { (value) in
+                switch value {
+                case .failure(let error):
+                    print(error.errorDescription ?? "")
+                case .finished:
+                    break
                 }
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
+            }) { [weak self](movie) in
+                guard let self = self else { return }
+                self.movies.insert(movie, at: 0)
+        }.store(in: &disposables)
     }
 }

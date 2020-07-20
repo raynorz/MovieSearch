@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Combine
 
 final class SampleMoviesService: MovieDataServiceProtocol {
     let apiManager: APIManager
@@ -17,9 +18,8 @@ final class SampleMoviesService: MovieDataServiceProtocol {
 }
 
 extension SampleMoviesService {
-    func searchMovie(byTitle: String, completion: @escaping ((Result<Movie, Error>) -> (Void))) {
+    func searchMovie(byTitle: String) -> AnyPublisher<Movie, APIError> {
         let url = URL(string: "")!
-        apiManager.request(url: url, completion: completion)
-        
+        return apiManager.request(url: url)
     }
 }
