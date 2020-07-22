@@ -14,12 +14,11 @@ final class MoviesViewModel: ObservableObject {
     @Published var movies: [Movie] = []
     
     private let movieDataService: MovieDataServiceProtocol
-    private let coreDataManager: CoreDataManager
+    private let coreDataManager: CoreDataManager = CoreDataManager.shared
     private var disposables = Set<AnyCancellable>()
     
-    init(movieDataService: MovieDataServiceProtocol, coreDataManager: CoreDataManager) {
+    init(movieDataService: MovieDataServiceProtocol) {
         self.movieDataService = movieDataService
-        self.coreDataManager = coreDataManager
     }
     
     func loadSavedMovies() {

@@ -11,19 +11,26 @@ import CoreData
 
 /// Simple Core Data Manager, that is able to handle save, fetch and delete from local database
 class CoreDataManager {
-    var container: NSPersistentContainer!
+    static let shared = CoreDataManager()
     
-    init() {
-        container = NSPersistentContainer(name: "MovieSearchSample")
-        
-        container.loadPersistentStores { (storeDescription, error) in
-            guard error == nil else {
-                fatalError("Cannot create persistent container")
-            }
+    private init() { }
+    
+    lazy var container: NSPersistentContainer! = {
+        return NSPersistentContainer(name: "MovieSearchSample")
+    }()
+}
+
+// MARK: - Setup
+extension CoreDataManager {
+    func setupCoreData(completion: (() -> Void)?) {
+        loadPersistentStore {
+            completion?()
         }
     }
 }
 
+
+// MARK: - Data handling
 extension CoreDataManager {
     /// save given structure into database
     /// - Parameter structure: structure to be converted into managedObject and saved into database
@@ -74,6 +81,16 @@ extension CoreDataManager {
 }
 
 private extension CoreDataManager {
+    func loadPersistentStore(completion: @escaping () -> (Void)) {
+        container.loadPersistentStores { (description, error) in
+            guard error == nil else {
+                fatalError("Could not load core data persistent store")
+            }
+            
+            completion()
+        }
+    }
+    
     func saveContext() {
         if container.viewContext.hasChanges {
             do {

@@ -6,11 +6,11 @@
 //  Copyright © 2020 Daniel Brezina. All rights reserved.
 //
 
-import Foundation
+
+// code from SwiftUI tutorial on Apple website
 
 import UIKit
 import SwiftUI
-import CoreLocation
 
 let sampleMoviesData: [Movie] = load("sampleMovies.json")
 
