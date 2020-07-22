@@ -20,9 +20,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 
         CoreDataManager.shared.setupCoreData {
+            // Dependency Injection
+            AppDIContainer.assembler.apply(assemblies: [DIAssembly()])
+            
+            // UI
             DispatchQueue.main.async {
                 // Create the SwiftUI view that provides the window contents.
-                let contentView = MoviesList().environmentObject(MoviesViewModel(movieDataService: MovieDataService(apiManager: ServerCommunication())))
+                let contentView = MoviesList().environmentObject(AppDIContainer.resolveObject(MoviesViewModel.self))
+//                let contentView = MoviesList().environmentObject(MoviesViewModel(movieDataService: MovieDataService(apiManager: ServerCommunication())))
 
                 // Use a UIHostingController as window root view controller.
                 if let windowScene = scene as? UIWindowScene {
