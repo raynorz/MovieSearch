@@ -27,7 +27,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             DispatchQueue.main.async {
                 // Create the SwiftUI view that provides the window contents.
                 let contentView = MoviesList().environmentObject(AppDIContainer.resolveObject(MoviesViewModel.self))
-//                let contentView = MoviesList().environmentObject(MoviesViewModel(movieDataService: MovieDataService(apiManager: ServerCommunication())))
 
                 // Use a UIHostingController as window root view controller.
                 if let windowScene = scene as? UIWindowScene {
