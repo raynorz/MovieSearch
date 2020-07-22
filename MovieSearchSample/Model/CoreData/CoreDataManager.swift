@@ -9,6 +9,7 @@
 import Foundation
 import CoreData
 
+/// Simple Core Data Manager, that is able to handle save, fetch and delete from local database
 class CoreDataManager {
     var container: NSPersistentContainer!
     
@@ -17,22 +18,24 @@ class CoreDataManager {
         
         container.loadPersistentStores { (storeDescription, error) in
             guard error == nil else {
-                print(error?.localizedDescription)
-                return
+                fatalError("Cannot create persistent container")
             }
-            
-            
         }
     }
 }
 
 extension CoreDataManager {
+    /// save given structure into database
+    /// - Parameter structure: structure to be converted into managedObject and saved into database
     func save<T: Saveble>(structure: T) {
         structure.convertToData(container.viewContext)
         saveContext()
     }
     
-    func fetch<T: NSManagedObject & Loadable, S: Codable>(entity: T.Type) -> [S]? {
+    /// fetch desired entity
+    /// - Parameter entity: entity to be fetch
+    /// - Returns: array of a structures created from given entity
+    func fetch<T: Loadable, S: Codable>(entity: T.Type) -> [S]? {
         let fetchRequest = T.fetchRequest()
         
         do {
@@ -51,10 +54,14 @@ extension CoreDataManager {
         return nil
     }
     
-    func delete<T: Deletable & NSManagedObject>(idToDelete id: String, type: T.Type) {
+    /// delete entity with given id
+    /// - Parameters:
+    ///   - id: id of entity to be delete
+    ///   - type: entity type
+    func delete<T: Deletable>(idToDelete id: String, type: T.Type) {
         do {
             let fetchRequest = T.fetchRequest()
-            fetchRequest.predicate = type.idPredicate(id: id)
+            fetchRequest.predicate = type.idPredicate(idToDelete: id)
             let results = try container.viewContext.fetch(fetchRequest) as? [T]
             results?.forEach { [weak self]entity in
                 guard let self = self else { return }

@@ -18,7 +18,7 @@ public class MovieEntity: NSManagedObject {
 extension MovieEntity: Loadable { }
 
 extension MovieEntity: Deletable {
-    static func idPredicate(id: String) -> NSPredicate {
-        return NSPredicate(format: "movieName == %@", id)
+    static func idPredicate(idToDelete: String) -> NSPredicate {
+        return NSPredicate(format: "movieName == %@", idToDelete)
     }
 }

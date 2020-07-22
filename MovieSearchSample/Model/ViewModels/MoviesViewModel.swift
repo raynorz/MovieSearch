@@ -14,15 +14,16 @@ final class MoviesViewModel: ObservableObject {
     @Published var movies: [Movie] = []
     
     private let movieDataService: MovieDataServiceProtocol
+    private let coreDataManager: CoreDataManager
     private var disposables = Set<AnyCancellable>()
-    private let coreData = CoreDataManager()
     
-    init(movieDataService: MovieDataServiceProtocol) {
+    init(movieDataService: MovieDataServiceProtocol, coreDataManager: CoreDataManager) {
         self.movieDataService = movieDataService
+        self.coreDataManager = coreDataManager
     }
     
     func loadSavedMovies() {
-        movies = coreData.fetch(entity: MovieEntity.self) ?? []
+        movies = coreDataManager.fetch(entity: MovieEntity.self) ?? []
     }
 
     func fetch(movie: String) {
@@ -38,13 +39,13 @@ final class MoviesViewModel: ObservableObject {
             }) { [weak self](movie) in
                 guard let self = self else { return }
                 self.movies.insert(movie, at: 0)
-                self.coreData.save(structure: movie)
+                self.coreDataManager.save(structure: movie)
         }.store(in: &disposables)
     }
     
     func deleteMovies(at indexes: IndexSet) {
         indexes.forEach { index in
-            self.coreData.delete(idToDelete: movies[index].title, type: MovieEntity.self)
+            self.coreDataManager.delete(idToDelete: movies[index].title, type: MovieEntity.self)
             self.movies.remove(at: index)
         }
     }
