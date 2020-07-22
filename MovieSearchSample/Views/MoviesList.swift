@@ -17,6 +17,8 @@ struct MoviesList: View {
             VStack {
                 InfoCell { (movie) -> (Void) in
                     self.search(movie: movie)
+                }.alert(isPresented: $viewModel.showAlert) {
+                    Alert(title: Text("Server error"), message: Text("Something went wrong during movie search"), dismissButton: .default(Text("OK")))
                 }
                 List {
                     ForEach(viewModel.movies, id: \.title) { movie in

@@ -9,9 +9,10 @@
 import Combine
 import SwiftUI
 
-/// Basic view model, that calls movie search requests and holds all the data for the view
+/// Basic view model, that calls movie search requests and holds all the data for the view and handles persistance of data
 final class MoviesViewModel: ObservableObject {
     @Published var movies: [Movie] = []
+    @Published var showAlert = false
     
     private let movieDataService: MovieDataServiceProtocol
     private let coreDataManager: CoreDataManager = CoreDataManager.shared
@@ -28,10 +29,11 @@ final class MoviesViewModel: ObservableObject {
     func fetch(movie: String) {
         movieDataService.searchMovie(byTitle: movie)
             .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { (value) in
+            .sink(receiveCompletion: { [weak self](value) in
+                guard let self = self else { return }
                 switch value {
-                case .failure(let error):
-                    print(error.errorDescription ?? "")
+                case .failure:
+                    self.showAlert = true
                 case .finished:
                     break
                 }
