@@ -44,7 +44,8 @@ final class MoviesViewModel: ObservableObject {
     
     func deleteMovies(at indexes: IndexSet) {
         indexes.forEach { index in
-//            self.coreData.
+            self.coreData.delete(idToDelete: movies[index].title, type: MovieEntity.self)
+            self.movies.remove(at: index)
         }
     }
 }

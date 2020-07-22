@@ -50,6 +50,20 @@ extension CoreDataManager {
         
         return nil
     }
+    
+    func delete<T: Deletable & NSManagedObject>(idToDelete id: String, type: T.Type) {
+        do {
+            let fetchRequest = T.fetchRequest()
+            fetchRequest.predicate = type.idPredicate(id: id)
+            let results = try container.viewContext.fetch(fetchRequest) as? [T]
+            results?.forEach { [weak self]entity in
+                guard let self = self else { return }
+                self.container.viewContext.delete(entity)
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
 }
 
 private extension CoreDataManager {

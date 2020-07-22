@@ -2,8 +2,9 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19G73" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="MovieEntity" representedClassName="MovieEntity" syncable="YES">
         <attribute name="data" optional="YES" attributeType="Binary"/>
+        <attribute name="movieName" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="MovieEntity" positionX="-63" positionY="-18" width="128" height="58"/>
+        <element name="MovieEntity" positionX="-63" positionY="-18" width="128" height="73"/>
     </elements>
 </model>

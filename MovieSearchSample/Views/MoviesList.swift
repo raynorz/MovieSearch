@@ -40,7 +40,7 @@ extension MoviesList {
     }
     
     func removeMovies(at indexes: IndexSet) {
-        
+        viewModel.deleteMovies(at: indexes)
     }
 }
 

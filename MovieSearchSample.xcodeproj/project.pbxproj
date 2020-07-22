@@ -33,8 +33,7 @@
 		2C74E9B124C881DB00972663 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C74E9B024C881DB00972663 /* CoreDataManager.swift */; };
 		2C74E9C024C8855100972663 /* MovieEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C74E9BE24C8855100972663 /* MovieEntity+CoreDataClass.swift */; };
 		2C74E9C124C8855100972663 /* MovieEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C74E9BF24C8855100972663 /* MovieEntity+CoreDataProperties.swift */; };
-		2C74E9C324C8886D00972663 /* Saveble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C74E9C224C8886D00972663 /* Saveble.swift */; };
-		2C74E9C524C88AB100972663 /* Loadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C74E9C424C88AB100972663 /* Loadable.swift */; };
+		2C74E9C724C895D700972663 /* CoreDataProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C74E9C624C895D700972663 /* CoreDataProtocols.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,8 +77,7 @@
 		2C74E9B024C881DB00972663 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		2C74E9BE24C8855100972663 /* MovieEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MovieEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		2C74E9BF24C8855100972663 /* MovieEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MovieEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		2C74E9C224C8886D00972663 /* Saveble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Saveble.swift; sourceTree = "<group>"; };
-		2C74E9C424C88AB100972663 /* Loadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loadable.swift; sourceTree = "<group>"; };
+		2C74E9C624C895D700972663 /* CoreDataProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataProtocols.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -244,8 +242,7 @@
 				2C74E9BF24C8855100972663 /* MovieEntity+CoreDataProperties.swift */,
 				2C74E9AD24C87FA600972663 /* MovieSearchSample.xcdatamodeld */,
 				2C74E9B024C881DB00972663 /* CoreDataManager.swift */,
-				2C74E9C224C8886D00972663 /* Saveble.swift */,
-				2C74E9C424C88AB100972663 /* Loadable.swift */,
+				2C74E9C624C895D700972663 /* CoreDataProtocols.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -366,10 +363,9 @@
 				2C0E195F24B8673400E7F4D8 /* SampleDataConvetor.swift in Sources */,
 				2C0E196224B867CB00E7F4D8 /* SampleMoviesService.swift in Sources */,
 				2C0E194D24B8667C00E7F4D8 /* MoviesViewModel.swift in Sources */,
-				2C74E9C324C8886D00972663 /* Saveble.swift in Sources */,
-				2C74E9C524C88AB100972663 /* Loadable.swift in Sources */,
 				2C74E9AF24C87FA600972663 /* MovieSearchSample.xcdatamodeld in Sources */,
 				2C0E194F24B8668200E7F4D8 /* SearchMovieRouter.swift in Sources */,
+				2C74E9C724C895D700972663 /* CoreDataProtocols.swift in Sources */,
 				2C0E195324B8668F00E7F4D8 /* Movie.swift in Sources */,
 				2C0E196624B8697800E7F4D8 /* MovieDetail.swift in Sources */,
 				2C0E194A24B8667300E7F4D8 /* APIError.swift in Sources */,

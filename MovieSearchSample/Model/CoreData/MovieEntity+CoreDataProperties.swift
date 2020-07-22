@@ -18,9 +18,6 @@ extension MovieEntity {
     }
 
     @NSManaged public var data: Data?
+    @NSManaged public var movieName: String?
 
-}
-
-extension MovieEntity: Loadable {
-    
 }

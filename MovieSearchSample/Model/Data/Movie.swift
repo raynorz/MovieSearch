@@ -64,6 +64,7 @@ extension Movie: Saveble {
     func convertToData(_ managedObjectContext: NSManagedObjectContext) {
         let movieEntity = MovieEntity(context: managedObjectContext)
         let encoder = JSONEncoder()
+        movieEntity.movieName = self.title
         movieEntity.data = try? encoder.encode(self)
     }
 }
