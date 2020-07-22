@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 
 // MARK: - Movie
 
@@ -56,5 +57,13 @@ struct Rating: Codable {
     enum CodingKeys: String, CodingKey {
         case source = "Source"
         case value = "Value"
+    }
+}
+
+extension Movie: Saveble {
+    func convertToData(_ managedObjectContext: NSManagedObjectContext) {
+        let movieEntity = MovieEntity(context: managedObjectContext)
+        let encoder = JSONEncoder()
+        movieEntity.data = try? encoder.encode(self)
     }
 }

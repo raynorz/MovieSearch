@@ -18,13 +18,18 @@ struct MoviesList: View {
                 InfoCell { (movie) -> (Void) in
                     self.search(movie: movie)
                 }
-                List(viewModel.movies, id: \.title) { movie in
-                    NavigationLink(destination: MovieDetail(movie: movie)) {
-                        MovieCell(movie: movie)
+                List {
+                    ForEach(viewModel.movies, id: \.title) { movie in
+                        NavigationLink(destination: MovieDetail(movie: movie)) {
+                            MovieCell(movie: movie)
+                        }
                     }
+                    .onDelete(perform: removeMovies(at:))
                 }
             }
         .navigationBarTitle(Text("Search a movie"))
+        }.onAppear {
+            self.viewModel.loadSavedMovies()
         }
     }
 }
@@ -32,6 +37,10 @@ struct MoviesList: View {
 extension MoviesList {
     func search(movie: String) {
         viewModel.fetch(movie: movie)
+    }
+    
+    func removeMovies(at indexes: IndexSet) {
+        
     }
 }
 

@@ -15,9 +15,14 @@ final class MoviesViewModel: ObservableObject {
     
     private let movieDataService: MovieDataServiceProtocol
     private var disposables = Set<AnyCancellable>()
+    private let coreData = CoreDataManager()
     
     init(movieDataService: MovieDataServiceProtocol) {
         self.movieDataService = movieDataService
+    }
+    
+    func loadSavedMovies() {
+        movies = coreData.fetch(entity: MovieEntity.self) ?? []
     }
 
     func fetch(movie: String) {
@@ -33,6 +38,13 @@ final class MoviesViewModel: ObservableObject {
             }) { [weak self](movie) in
                 guard let self = self else { return }
                 self.movies.insert(movie, at: 0)
+                self.coreData.save(structure: movie)
         }.store(in: &disposables)
+    }
+    
+    func deleteMovies(at indexes: IndexSet) {
+        indexes.forEach { index in
+//            self.coreData.
+        }
     }
 }
